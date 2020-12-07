@@ -1,8 +1,9 @@
 
 class FuzzyValue():
 
-    def __init__(self):
+    def __init__(self, output=False):
         self.sets = []
+        self.output = output
 
     def add_set(self, set):
         if set.label in [s.label for s in self.sets]:
@@ -14,3 +15,9 @@ class FuzzyValue():
         for set in self.sets:
             memberships_dict[set] = set.calculate_membership(value)
         return memberships_dict
+
+    def get_set(self, label):
+        result = [s for s in self.sets if s.label == label]
+        if len(result) != 1:
+            return None
+        return result[0]

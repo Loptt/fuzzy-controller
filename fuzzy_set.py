@@ -1,6 +1,6 @@
 
 class FuzzySet:
-    
+
     def __init__(self, label, a, b, c, d):
         self.label = label
         self.a = a
