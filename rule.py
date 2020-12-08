@@ -1,20 +1,21 @@
 
 class Rule():
 
-    def __init__(self, ant1, ant2, consequent, operator):
-        self.ant1 = ant1
-        self.ant2 = ant2
-        self.consequent = consequent
+    def __init__(self, antecedents, consequents, operator):
+        self.antecedents = antecedents
+        self.consequents = consequents
         self.operator = operator
 
-    def calculate_fire(self, ant1_membership, ant2_membership):
-        ant1_val = ant1_membership[self.ant1]
-        ant2_val = ant2_membership[self.ant2]
+    def calculate_fire(self, ant_memberships):
+        ant_values = [membership[ant] for membership,
+                      ant in zip(ant_memberships, self.antecedents)]
+
+        consequent_fires = {}
 
         if self.operator == FuzzyOperator.AND:
-            return min(ant1_val, ant2_val)
+            return min(ant_values)
         elif self.operator == FuzzyOperator.OR:
-            return max(ant1_val, ant2_val)
+            return max(ant_values)
         else:
             raise Exception("Invalid Fuzzy Operator")
 
