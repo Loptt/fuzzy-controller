@@ -1,4 +1,4 @@
-import fuzzy_set as fs
+from .. import fuzzy_set as fs
 from . import fuzzy_value as fv
 from . import fuzzy_controller as fc
 
