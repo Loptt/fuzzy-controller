@@ -19,5 +19,8 @@ class FuzzyValue():
     def get_set(self, label):
         result = [s for s in self.sets if s.label == label]
         if len(result) != 1:
-            return None
+            raise Exception("Requested label set does not exist")
         return result[0]
+
+    def set_amount(self):
+        return len(self.sets)

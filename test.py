@@ -1,25 +1,33 @@
 import fuzzy_set as fs
 import fuzzy_value as fv
-import rule_set as rs
+import fuzzy_controller as fc
 
 
 temp_value = fv.FuzzyValue()
-temp_value.add_set(fs.FuzzySet("Low", 0, 3, 6, 9))
-temp_value.add_set(fs.FuzzySet("Medium", 6, 9, 12, 15))
-temp_value.add_set(fs.FuzzySet("High", 13, 15, 18, 21))
+temp_value.add_set(fs.FuzzySet("Low", 0, 5, 5, 10))
+temp_value.add_set(fs.FuzzySet("Medium", 5, 10, 10, 15))
+temp_value.add_set(fs.FuzzySet("High", 10, 15, 15, 20))
 
-dist_value = fv.FuzzyValue()
-dist_value.add_set(fs.FuzzySet("Low", 0, 3, 6, 9))
-dist_value.add_set(fs.FuzzySet("Medium", 6, 9, 12, 15))
-dist_value.add_set(fs.FuzzySet("High", 13, 15, 18, 21))
+cloud_value = fv.FuzzyValue()
+cloud_value.add_set(fs.FuzzySet("Low", 0, 5, 5, 10))
+cloud_value.add_set(fs.FuzzySet("Medium", 5, 10, 10, 15))
+cloud_value.add_set(fs.FuzzySet("High", 10, 15, 15, 20))
 
 speed_value = fv.FuzzyValue(output=True)
-speed_value.add_set(fs.FuzzySet("Low", 0, 3, 6, 9))
-speed_value.add_set(fs.FuzzySet("Medium", 6, 9, 12, 15))
-speed_value.add_set(fs.FuzzySet("High", 13, 15, 18, 21))
+speed_value.add_set(fs.FuzzySet("Low", 0, 10, 10, 20))
+speed_value.add_set(fs.FuzzySet("Medium", 10, 20, 20, 30))
+speed_value.add_set(fs.FuzzySet("High", 20, 30, 30, 40))
 
-rules = rs.RuleSet()
-rules.add_rule(temp_value.get_set("Low"), dist_value.get_set(
-    "Medium"), speed_value.get_set("Medium"))
-rules.add_rule(temp_value.get_set("Low"), dist_value.get_set(
-    "High"), speed_value.get_set("High"))
+controller = fc.FuzzyController(
+    temp_value, cloud_value, speed_value, fc.FuzzyController.FuzzyOperator.AND)
+controller.add_rule("Low", "Low", "Low")
+controller.add_rule("Low", "Medium", "Low")
+controller.add_rule("Low", "High", "Medium")
+controller.add_rule("Medium", "Low", "Medium")
+controller.add_rule("Medium", "Medium", "Medium")
+controller.add_rule("Medium", "High", "Medium")
+controller.add_rule("High", "Low", "High")
+controller.add_rule("High", "Medium", "High")
+controller.add_rule("High", "High", "High")
+
+print(controller.fire(3, 14))

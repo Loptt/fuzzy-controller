@@ -1,5 +1,5 @@
 
-class FuzzySet:
+class FuzzySet():
 
     def __init__(self, label, a, b, c, d):
         self.label = label
@@ -19,3 +19,6 @@ class FuzzySet:
 
     def __str__(self):
         return "{}: a:{}, b:{}, c:{}, d:{}".format(self.label, self.a, self.b, self.c, self.d)
+
+    def get_centroid(self):
+        return (self.a+self.b+self.c+self.d)/4
