@@ -61,7 +61,7 @@ def calculate_turn(right_distance, front_distance):
     global right_controller, left_controller
     right_turn = right_controller.fire([right_distance, front_distance])[1]
     left_turn = left_controller.fire([right_distance, front_distance])[1]
-    
+
     return left_turn - right_turn
 
 
@@ -69,7 +69,5 @@ def calculate_speed(right_distance, front_distance):
     global right_controller, left_controller
     speed1 = right_controller.fire([right_distance, front_distance])[0]
     speed2 = left_controller.fire([right_distance, front_distance])[0]
-    
-    return min(speed1, speed2) 
 
-
+    return min(speed1, speed2)
