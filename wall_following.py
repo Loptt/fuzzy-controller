@@ -13,9 +13,9 @@ left_controller = None
 def setup():
     global right_controller, left_controller
     wall_value = fv.FuzzyValue()
-    wall_value.add_set(fs.FuzzySet("Close", 0, 0, 0.2, 0.5))
-    wall_value.add_set(fs.FuzzySet("Medium", 0.2, 0.5, 0.5, 0.8))
-    wall_value.add_set(fs.FuzzySet("Far", 0.5, 0.8, 1.2, 11))
+    wall_value.add_set(fs.FuzzySet("Close", 0, 0, 0.2, 0.45))
+    wall_value.add_set(fs.FuzzySet("Medium", 0.2, 0.45, 0.55, 0.8))
+    wall_value.add_set(fs.FuzzySet("Far", 0.55, 0.8, 1.2, 11))
 
     front_value = fv.FuzzyValue()
     front_value.add_set(fs.FuzzySet("Close", 0, 0.2, 0.3, 0.5))
@@ -28,9 +28,9 @@ def setup():
     speed_value.add_set(fs.FuzzySet("High", 0.4, 0.5, 0.6, 1))
 
     turn_value = fv.FuzzyValue(output=True)
-    turn_value.add_set(fs.FuzzySet("Centered", 0, 0, 0.01, 0.05))
-    turn_value.add_set(fs.FuzzySet("Low Turn", 0.01, 0.05, 0.05, 0.1))
-    turn_value.add_set(fs.FuzzySet("High Turn", 0.1, 0.5, 1, 1.4))
+    turn_value.add_set(fs.FuzzySet("Centered", 0, 0, 0.01, 0.02))
+    turn_value.add_set(fs.FuzzySet("Low Turn", 0, 0.02, 0.1, 0.4))
+    turn_value.add_set(fs.FuzzySet("High Turn", 0.1, 0.4, 0.4, 0.4))
 
     right_controller = fc.FuzzyController(
         [wall_value, front_value], [speed_value, turn_value], fc.FuzzyController.FuzzyOperator.AND)
