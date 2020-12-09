@@ -13,14 +13,14 @@ left_controller = None
 def setup():
     global right_controller, left_controller
     wall_value = fv.FuzzyValue()
-    wall_value.add_set(fs.FuzzySet("Close", 0.05, 0.05, 0.2, 0.45))
+    wall_value.add_set(fs.FuzzySet("Close", 0, 0, 0.75, 0.85))
     wall_value.add_set(fs.FuzzySet("Medium", 0.2, 0.75, 0.85, 1.4))
-    wall_value.add_set(fs.FuzzySet("Far", 0.85, 1.4, 100, 101))
+    wall_value.add_set(fs.FuzzySet("Far", 0.85, 1.4, 10, 11))
 
     front_value = fv.FuzzyValue()
     front_value.add_set(fs.FuzzySet("Close", 0.05, 0.05, 1.2, 1.4))
     front_value.add_set(fs.FuzzySet("Medium", 1.2, 1.4, 1.8, 2))
-    front_value.add_set(fs.FuzzySet("Far", 1.8, 2, 10, 11))
+    front_value.add_set(fs.FuzzySet("Far", 1.8, 2, 100, 101))
 
     speed_value = fv.FuzzyValue(output=True)
     speed_value.add_set(fs.FuzzySet("Low", 0, 0.2, 0.2, 0.3))
@@ -41,7 +41,7 @@ def setup():
     right_controller.add_rule(["Medium", "Medium"], ["Low", "Low Turn"])
     right_controller.add_rule(["Medium", "Far"], ["Low", "Low Turn"])
     right_controller.add_rule(["Far", "Close"], ["Low", "Centered"])
-    right_controller.add_rule(["Far", "Medium"], ["Low", "High Turn"])
+    right_controller.add_rule(["Far", "Medium"], ["Low", "Centered"])
     right_controller.add_rule(["Far", "Far"], ["Low", "High Turn"])
 
     left_controller = fc.FuzzyController([wall_value, front_value], [
@@ -53,7 +53,7 @@ def setup():
     left_controller.add_rule(["Medium", "Medium"], ["Low", "Low Turn"])
     left_controller.add_rule(["Medium", "Far"], ["Low", "Low Turn"])
     left_controller.add_rule(["Far", "Close"], ["Low", "High Turn"])
-    left_controller.add_rule(["Far", "Medium"], ["Low", "Centered"])
+    left_controller.add_rule(["Far", "Medium"], ["Low", "Low Turn"])
     left_controller.add_rule(["Far", "Far"], ["Low", "Centered"])
 
 
