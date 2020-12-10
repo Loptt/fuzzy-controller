@@ -26,9 +26,9 @@ def setup():
     speed_value.add_set(fs.FuzzySet("High", 0.4, 0.5, 0.9, 1))
 
     turn_value = fv.FuzzyValue(output=True)
-    turn_value.add_set(fs.FuzzySet("Left", 0.8, 0.8, 0.02, 0.01))
+    turn_value.add_set(fs.FuzzySet("Left", 1, 1, 0.02, 0.01))
     turn_value.add_set(fs.FuzzySet("Centered", 0.02, 0.01, -0.01, -0.02))
-    turn_value.add_set(fs.FuzzySet("Right", -0.01, -0.02, -0.8, -0.8))
+    turn_value.add_set(fs.FuzzySet("Right", -0.01, -0.02, -1, -1))
 
     obstacle_controller = fc.FuzzyController([left_value, front_value, right_value], [
                                              speed_value, turn_value], fc.FuzzyController.FuzzyOperator.AND)
