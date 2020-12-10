@@ -10,18 +10,18 @@ def setup():
     global obstacle_controller
     left_value = fv.FuzzyValue()
     left_value.add_set(fs.FuzzySet("Close", 0, 0, 0.75, 0.85))
-    left_value.add_set(fs.FuzzySet("Medium", 0.2, 0.75, 0.85, 1.4))
-    left_value.add_set(fs.FuzzySet("Far", 0.85, 1.4, 100, 101))
+    left_value.add_set(fs.FuzzySet("Medium", 0.75, 0.85, 1.3, 1.4))
+    left_value.add_set(fs.FuzzySet("Far", 1.3, 1.4, 100, 101))
 
     right_value = fv.FuzzyValue()
     right_value.add_set(fs.FuzzySet("Close", 0, 0, 0.75, 0.85))
-    right_value.add_set(fs.FuzzySet("Medium", 0.2, 0.75, 0.85, 1.4))
-    right_value.add_set(fs.FuzzySet("Far", 0.85, 1.4, 100, 101))
+    right_value.add_set(fs.FuzzySet("Medium", 0.75, 0.85, 1.3, 1.4))
+    right_value.add_set(fs.FuzzySet("Far", 1.3, 1.4, 100, 101))
 
     front_value = fv.FuzzyValue()
-    front_value.add_set(fs.FuzzySet("Close", 0.05, 0.05, 1.2, 1.4))
-    front_value.add_set(fs.FuzzySet("Medium", 1.2, 1.4, 1.8, 2))
-    front_value.add_set(fs.FuzzySet("Far", 1.8, 2, 100, 101))
+    front_value.add_set(fs.FuzzySet("Close", 0, 0, 1.6, 1.8))
+    front_value.add_set(fs.FuzzySet("Medium", 1.6, 1.8, 2, 2.2))
+    front_value.add_set(fs.FuzzySet("Far", 2, 2.2, 100, 101))
 
     speed_value = fv.FuzzyValue(output=True)
     speed_value.add_set(fs.FuzzySet("Low", 0, 0.2, 0.2, 0.3))
