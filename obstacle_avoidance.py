@@ -21,9 +21,9 @@ def setup():
     front_value.add_set(fs.FuzzySet("Far", 1.6, 2.2, 100, 101))
 
     speed_value = fv.FuzzyValue(output=True)
-    speed_value.add_set(fs.FuzzySet("Low", 0, 0.2, 0.2, 0.3))
-    speed_value.add_set(fs.FuzzySet("Medium", 0.2, 0.3, 0.4, 0.5))
-    speed_value.add_set(fs.FuzzySet("High", 0.4, 0.5, 0.9, 1))
+    speed_value.add_set(fs.FuzzySet("Low", 0, 0, 0.2, 0.4))
+    speed_value.add_set(fs.FuzzySet("Medium", 0.2, 0.4, 0.7, 0.8))
+    speed_value.add_set(fs.FuzzySet("High", 0.7, 0.8, 1.1, 1.2))
 
     turn_value = fv.FuzzyValue(output=True)
     turn_value.add_set(fs.FuzzySet("Left", 1, 1, 0.02, 0.01))
@@ -35,13 +35,13 @@ def setup():
 
     obstacle_controller.add_rule(["Close", "Close", "Close"], ["Low", "Left"])
     obstacle_controller.add_rule(["Close", "Close", "Far"], ["Low", "Right"])
-    obstacle_controller.add_rule(["Close", "Far", "Close"], ["Low", "Centered"])
+    obstacle_controller.add_rule(["Close", "Far", "Close"], ["Medium", "Centered"])
     obstacle_controller.add_rule(["Close", "Far", "Far"], ["Low", "Right"])
 
     obstacle_controller.add_rule(["Far", "Close", "Close"], ["Low", "Left"])
     obstacle_controller.add_rule(["Far", "Close", "Far"], ["Low", "Right"])
-    obstacle_controller.add_rule(["Far", "Far", "Close"], ["Low", "Centered"])
-    obstacle_controller.add_rule(["Far", "Far", "Far"], ["Low", "Centered"])
+    obstacle_controller.add_rule(["Far", "Far", "Close"], ["Medium", "Centered"])
+    obstacle_controller.add_rule(["Far", "Far", "Far"], ["Medium", "Centered"])
 
 
 def calculate_turn(left_distance, front_distance, right_distance):
