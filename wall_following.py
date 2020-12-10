@@ -15,7 +15,7 @@ def setup():
     wall_value = fv.FuzzyValue()
     wall_value.add_set(fs.FuzzySet("Close", 0, 0, 0.75, 0.85))
     wall_value.add_set(fs.FuzzySet("Medium", 0.2, 0.75, 0.85, 1.4))
-    wall_value.add_set(fs.FuzzySet("Far", 0.85, 1.4, 10, 11))
+    wall_value.add_set(fs.FuzzySet("Far", 0.85, 1.4, 100, 101))
 
     front_value = fv.FuzzyValue()
     front_value.add_set(fs.FuzzySet("Close", 0.05, 0.05, 1.2, 1.4))
@@ -61,7 +61,7 @@ def calculate_turn(right_distance, front_distance):
     global right_controller, left_controller
     right_turn = right_controller.fire([right_distance, front_distance])[1]
     left_turn = left_controller.fire([right_distance, front_distance])[1]
-
+    
     return left_turn - right_turn
 
 
@@ -69,5 +69,7 @@ def calculate_speed(right_distance, front_distance):
     global right_controller, left_controller
     speed1 = right_controller.fire([right_distance, front_distance])[0]
     speed2 = left_controller.fire([right_distance, front_distance])[0]
+    
+    return min(speed1, speed2) 
 
-    return min(speed1, speed2)
+
